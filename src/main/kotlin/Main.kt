@@ -4,7 +4,13 @@ fun main(args: Array<String>) {
     val people = listOf(
             Person("Erik A", 5400+500+7700),
             Person("Jacob R", 799),
-            Person("Jakob S")
+            Person("Erik L", 160),
+            Person("Tobias", 280),
+            Person("Jakob S"),
+            Person("Mathias"),
+            Person("Mikael"),
+            Person("Wallin"),
+            Person("Peter")
     )
 
     run(people)
@@ -20,11 +26,12 @@ fun run(people: List<Person>) {
     balance(people, perPerson)
 }
 
-fun balance(people: List<Person>, perPerson: Int) = people.sortedBy { it.balance }
+fun balance(people: List<Person>, perPerson: Int) =
+        people.sortedBy { it.balance }
             .filter { it.balance < perPerson }
             .forEach { while(it.balance < perPerson)
                 with(personWithHighestExpense(people)) { it.sendMoneyTo(maxTransfer(it, this, perPerson), this) } }
 
-fun maxTransfer(from: Person, to: Person, perPerson: Int) = min(perPerson - from.balance, to.balance - perPerson)
+private fun maxTransfer(from: Person, to: Person, perPerson: Int) = min(perPerson - from.balance, to.balance - perPerson)
 
 private fun personWithHighestExpense(people: List<Person>) = people.sortedByDescending { it.balance }.first()

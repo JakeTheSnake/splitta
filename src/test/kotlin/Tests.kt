@@ -6,15 +6,6 @@ class Tests {
     private var name: Int = 1
 
     @Test
-    fun it_should_be_possible_to_add_expenses_to_person() {
-        val person = person(20)
-
-        person.addExpense(500)
-
-        assertEquals(person.balance, 520)
-    }
-
-    @Test
     fun a_person_can_send_money_to_another() {
         val person1 = person(500)
         val person2 = person()
