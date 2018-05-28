@@ -10,7 +10,7 @@ class Tests {
         val person1 = person(500)
         val person2 = person()
 
-        person2.sendMoneyTo(250, person1)
+        person2.sendMoneyTo(250.0, person1)
 
         assertEquals(person1.balance, 250)
         assertEquals(person2.balance, 250)
@@ -104,5 +104,5 @@ class Tests {
         people.forEach { assertEquals(it.balance, 3075) }
     }
 
-    private fun person(amount: Int = 0) = Person("${name++}", amount)
+    private fun person(amount: Int = 0) = Person("${name++}", 0.0 + amount)
 }

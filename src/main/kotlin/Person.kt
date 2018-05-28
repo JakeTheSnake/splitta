@@ -1,23 +1,25 @@
-class Person(private val name: String, var balance: Int = 0) {
+class Person(val name: String, var balance: Double = 0.0) {
     val incoming: MutableList<Transaction> = mutableListOf()
     val outgoing: MutableList<Transaction> = mutableListOf()
 
-    fun sendMoneyTo(amount: Int, person: Person) {
+    fun sendMoneyTo(amount: Double, person: Person) {
         balance += amount
         outgoing.add(Transaction(amount, person))
         person.receiveMoneyFrom(amount, this)
     }
 
-    private fun receiveMoneyFrom(amount: Int, person: Person) {
+    private fun receiveMoneyFrom(amount: Double, person: Person) {
         balance -= amount
         incoming.add(Transaction(amount, person))
     }
 
     override fun toString() =
-        "$name - $balance\n" +
-                outgoing.joinToString("\n") { "\t${it.amount} -> ${it.person.name}" } +
-                incoming.joinToString("\n") { "\t<- ${it.amount} ${it.person.name}" }
+        "$name - ${balance.format()} kr\n" +
+                outgoing.joinToString("") { "\tSkicka ${it.amount.format()} kr till ${it.person.name}\n" } +
+                incoming.joinToString("") { "\tTa emot ${it.amount.format()} kr från ${it.person.name}\n" }
+
+    private fun Double.format(digits: Int = 0): String = java.lang.String.format("%.${digits}f", this)
 }
 
-data class Transaction(val amount: Int, val person: Person)
+data class Transaction(val amount: Double, val person: Person)
 
