@@ -16,11 +16,11 @@ class Tests {
         assertEquals(person2.balance, 250)
         person1.incoming.first().apply {
             assertEquals(amount, 250)
-            assertEquals(person, person2)
+            assertEquals(to, person2)
         }
         person2.outgoing.first().apply {
             assertEquals(amount, 250)
-            assertEquals(person, person1)
+            assertEquals(from, person1)
         }
     }
 
